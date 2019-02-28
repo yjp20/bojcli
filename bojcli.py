@@ -68,7 +68,7 @@ def _g(msg):
 
 def error(msg):
     print(colored(msg, 'red'))
-    sys.exit()
+    sys.exit(1)
 
 def read_config():
     config = configparser.ConfigParser()
@@ -182,8 +182,11 @@ def get_updates(session, username, problem_id):
         print('result: %s           \r' % colored(RESULT_MAP[result], RESULT_COLOR[result]), end='')
         if 4 <= result:
             print('')
-            print('time: %s ms   mem: %s kb' % (_g(solution['time']), _g(solution['memory'])))
-            break
+            if result == 4:
+                print('time: %s ms   mem: %s kb' % (_g(solution['time']), _g(solution['memory'])))
+                break;
+            else:
+                sys.exit(1)
 
 def main():
     print('\n\n # acmicpc submitter by Young Jin Park\n # <youngjinpark20@gmail.com>\n')
