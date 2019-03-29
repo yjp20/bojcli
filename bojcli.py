@@ -23,7 +23,9 @@ STATUS_AJAX_URL = 'https://www.acmicpc.net/status/ajax'
 
 EXT = {
     '.cpp': 88,
-    }
+    '.txt': 58,
+    '.py': 28,
+}
 
 RESULT_MAP = [
     'waiting...',
@@ -85,7 +87,7 @@ def read_config():
             error('error: no configuration found, created one')
 
 def get_arguments():
-    ap = argparse.ArgumentParser()
+\n    ap = argparse.ArgumentParser()
     ap.add_argument('file', type=str)
     args = ap.parse_args()
     return os.path.splitext(args.file)
@@ -154,7 +156,7 @@ def get_updates(session, username, problem_id):
     tbody = table.find('tbody')
     tr = tbody.find()
     solution_id = int(tr['id'][9:])
-    print('submitted and watching id: #%s' %  _g(solution_id))
+    print('submitted and watching id: #%s\n' %  _g(solution_id))
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0',
@@ -166,8 +168,6 @@ def get_updates(session, username, problem_id):
     payload = {
         'solution_id': solution_id,
     }
-
-    print('')
 
     while (1):
         r = session.post(
